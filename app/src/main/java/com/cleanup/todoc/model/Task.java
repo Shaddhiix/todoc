@@ -1,20 +1,21 @@
 package com.cleanup.todoc.model;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
 import java.util.Comparator;
 
-/**
- * <p>Model for the tasks of the application.</p>
- *
- * @author Gaëtan HERFRAY
- */
+@Entity(foreignKeys = @ForeignKey ( entity = Project.class, 
+        parentColumns = "id", childColumns = "project id"))
+
 public class Task {
     /**
      * The unique identifier of the task
      */
+    @PrimaryKey(autoGenerate = true)
     private long id;
 
     /**
