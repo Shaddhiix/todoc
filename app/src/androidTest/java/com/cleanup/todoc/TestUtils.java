@@ -1,8 +1,8 @@
 package com.cleanup.todoc;
 
-import android.support.annotation.IdRes;
 import android.view.View;
 
+import androidx.annotation.IdRes;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.PerformException;
 import androidx.test.espresso.UiController;
@@ -18,10 +18,8 @@ import org.hamcrest.Matchers;
  */
 public class TestUtils {
 
-    public static <VH extends RecyclerView.ViewHolder> ViewAction actionOnItemViewAtPosition(int position,
-                                                                                             @IdRes
-                                                                                                     int viewId,
-                                                                                             ViewAction viewAction) {
+    public static <VH extends RecyclerView.ViewHolder> 
+    ViewAction actionOnItemViewAtPosition(int position, @IdRes int viewId, ViewAction viewAction) {
         return new ActionOnItemViewAtPositionViewAction<> ( position, viewId, viewAction );
     }
 
@@ -39,9 +37,7 @@ public class TestUtils {
         private final ViewAction viewAction;
         private final int viewId;
 
-        private ActionOnItemViewAtPositionViewAction(int position,
-                                                     @IdRes int viewId,
-                                                     ViewAction viewAction) {
+        private ActionOnItemViewAtPositionViewAction(int position, @IdRes int viewId, ViewAction viewAction) {
             this.position = position;
             this.viewAction = viewAction;
             this.viewId = viewId;
