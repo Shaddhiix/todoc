@@ -20,7 +20,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private ProjectDataRepository projectDataRepository;
     private Executor executor;
     private static ViewModelFactory factory;
-    private static ViewModelFactory getInstance(Context context) {
+    public static ViewModelFactory getInstance(Context context) {
         if (factory == null) {
 
             synchronized (ViewModelFactory.class) {
