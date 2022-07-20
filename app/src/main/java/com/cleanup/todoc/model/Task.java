@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 import java.util.Comparator;
 
 @Entity(foreignKeys = @ForeignKey ( entity = Project.class, 
-        parentColumns = "id", childColumns = "project id"))
+        parentColumns = "id", childColumns = "projectId"))
 
 public class Task {
     /**
@@ -78,6 +78,10 @@ public class Task {
         this.projectId = projectId;
     }
 
+    public long getProjectId() {
+        return projectId;
+    }
+
     /**
      * Returns the project associated to the task.
      *
@@ -105,6 +109,10 @@ public class Task {
      */
     private void setName(@NonNull String name) {
         this.name = name;
+    }
+
+    public long getCreationTimestamp() {
+        return creationTimestamp;
     }
 
     /**

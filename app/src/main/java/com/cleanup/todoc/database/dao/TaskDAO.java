@@ -18,9 +18,6 @@ public interface TaskDAO {
     @Insert
     long insertTask(Task task);
     
-    @Insert
-    int updateTask(Task task);
-    
     @Query ( "DELETE FROM Task WHERE id = :taskId" )
     int deleteTask(long taskId);
 }
