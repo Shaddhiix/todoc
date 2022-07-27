@@ -3,6 +3,7 @@ package com.cleanup.todoc.model;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,6 +13,7 @@ public class Project {
      * The unique identifier of the project
      */
     @PrimaryKey
+    @ColumnInfo(name = "id")
     private final long id;
 
     /**
