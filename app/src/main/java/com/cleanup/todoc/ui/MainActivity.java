@@ -201,13 +201,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
 
                 Task task = new Task(
-                        id,
+                        //id,
                         taskProject.getId(),
                         taskName,
                         new Date().getTime()
                 );
 
                 addTask(task);
+                createTask(task);
 
                 dialogInterface.dismiss();
             }
