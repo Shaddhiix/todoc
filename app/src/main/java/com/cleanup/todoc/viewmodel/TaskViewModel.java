@@ -18,39 +18,30 @@ public class TaskViewModel extends ViewModel {
     private ProjectDataRepository projectDataRepository;
     private Executor executor;
     
-    //DATA
-    private LiveData<Project> currentProject;
-
     public TaskViewModel(TaskDataRepository taskDataRepository, ProjectDataRepository projectDataRepository
             , Executor executor) {
         this.taskDataRepository = taskDataRepository;
         this.projectDataRepository = projectDataRepository;
         this.executor = executor;
     }
-    public void init(long projectId) {
-        if(this.currentProject != null) {
-            return;
-        }
-        currentProject = projectDataRepository.getProject ( projectId );
-    }
     
     /*
     * For Project
     */
-    public LiveData<Project> getProject() {
-        return this.currentProject;
+    public LiveData<List<Project>> getAllProjects() {
+        return this.projectDataRepository.getAllProjects();
     }
     
     /*
     * For Task
     */
-    public LiveData<List<Task>> getTask() {
-        return this.taskDataRepository.getTask();
+    public LiveData<List<Task>> getAllTasks() {
+        return this.taskDataRepository.getAllTasks();
     }
     
-    public void createTask(Task task) {
+    public void insertTask(Task task) {
         executor.execute (() -> {
-            this.taskDataRepository.createTask(task);
+            this.taskDataRepository.insertTask(task);
         });
     }
 

@@ -1,9 +1,11 @@
 package com.cleanup.todoc.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -36,7 +38,7 @@ public  abstract class TodocDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
 
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    TodocDatabase.class, "MyDatabase.db")
+                                    TodocDatabase.class, "TodocDatabase.db")
                             .addCallback(prepopulateDatabase())
                             .build();
                 }
@@ -50,9 +52,12 @@ public  abstract class TodocDatabase extends RoomDatabase {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate ( db );
-                Executors.newSingleThreadExecutor().execute(() -> 
-                        INSTANCE.projectDAO ().createProject (new Project
-                                (4, "Projet J.O", 0xFFEADAD2)));
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("id", 1L);
+                contentValues.put("name", "Projet Tartampion");
+                contentValues.put("color", 0xFFEADAD1);
+                db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
+
             }
         };
     }

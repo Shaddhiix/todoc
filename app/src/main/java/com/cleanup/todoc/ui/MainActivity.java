@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     
     // 3 create a new task
     private void createTask(Task task) {
-       this.taskViewModel.createTask(task);
+       this.taskViewModel.insertTask (task);
     }
     
     private void getTasks() {
-        this.taskViewModel.getTask().observe(this, this::updateTasks);
+        this.taskViewModel.getAllTasks ().observe(this, this::updateTasks);
     }
     
     // 3 Delete a task
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
 
                 Task task = new Task(
-                        //id,
+                        id,
                         taskProject.getId(),
                         taskName,
                         new Date().getTime()
