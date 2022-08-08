@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * The RecyclerView which displays the list of tasks
      */
     // Suppress warning is safe because variable is initialized in onCreate
-    @SuppressWarnings("NullableProblems")
+    
     @NonNull
     private RecyclerView listTasks;
 
@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * The TextView displaying the empty state
      */
     // Suppress warning is safe because variable is initialized in onCreate
-    @SuppressWarnings("NullableProblems")
     @NonNull
     private TextView lblNoTasks;
 
