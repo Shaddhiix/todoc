@@ -22,6 +22,7 @@ import java.util.List;
 
 @RunWith (AndroidJUnit4.class)
 public class ProjectDaoTest {
+    
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
     private TodocDatabase database;
@@ -45,7 +46,8 @@ public class ProjectDaoTest {
         List<Project> projects = LiveDataTestUtil.getValue(this.database.projectDAO().getAllProjects());
         assertTrue(projects.isEmpty());
         this.database.projectDAO().insertProject(this.projects);
-        
+
+        projects = LiveDataTestUtil.getValue(this.database.projectDAO().getAllProjects());
         assertEquals(projects.get(0).getName(), this.projects[0].getName());
         assertEquals(projects.get(0).getId(), this.projects[0].getId());
         assertEquals(projects.get(0).getColor(), this.projects[0].getColor());

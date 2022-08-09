@@ -11,14 +11,14 @@ public class TaskDataRepository {
 
     private final TaskDAO taskDao;
 
-    public TaskDataRepository(TaskDAO taskDAO) { this.taskDao = taskDAO; }
+    public TaskDataRepository(TaskDAO taskDAO) { taskDao = taskDAO; }
     
     public LiveData<List<Task>> getAllTasks() {
-        return this.taskDao.getTasks();
+        return taskDao.getAllTasks ();
     }
     
     public void insertTask(Task task) {
-        this.taskDao.insertTask(task);
+        taskDao.insertTask(task);
     }
     
     public void deleteTask(Task task) {

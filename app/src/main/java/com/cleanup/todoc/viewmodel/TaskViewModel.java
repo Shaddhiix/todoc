@@ -14,9 +14,9 @@ import java.util.concurrent.Executor;
 public class TaskViewModel extends ViewModel {
     
     //REPOSITORY
-    private TaskDataRepository taskDataRepository;
-    private ProjectDataRepository projectDataRepository;
-    private Executor executor;
+    private final TaskDataRepository taskDataRepository;
+    private final ProjectDataRepository projectDataRepository;
+    private final Executor executor;
     
     public TaskViewModel(TaskDataRepository taskDataRepository, ProjectDataRepository projectDataRepository
             , Executor executor) {
@@ -40,14 +40,10 @@ public class TaskViewModel extends ViewModel {
     }
     
     public void insertTask(Task task) {
-        executor.execute (() -> {
-            this.taskDataRepository.insertTask(task);
-        });
+        executor.execute (() -> taskDataRepository.insertTask(task));
     }
 
     public void deleteTask(Task task) {
-        executor.execute(() -> {
-            taskDataRepository.deleteTask(task);
-        });
+        executor.execute(() -> taskDataRepository.deleteTask(task));
     }
 }

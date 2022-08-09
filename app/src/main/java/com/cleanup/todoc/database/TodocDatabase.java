@@ -15,49 +15,46 @@ import com.cleanup.todoc.database.dao.TaskDAO;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
-import java.util.concurrent.Executors;
+@Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
 
-@Database ( entities = {Task.class, Project.class}, version = 1, exportSchema = false)
+public abstract class TodocDatabase extends RoomDatabase {
 
-public  abstract class TodocDatabase extends RoomDatabase {
-    
     // SINGLETON
     private static volatile TodocDatabase INSTANCE;
-    
+
     // DAO
     public abstract TaskDAO taskDAO();
     public abstract ProjectDAO projectDAO();
-    
+
     // INSTANCE
     public static TodocDatabase getInstance(Context context) {
 
         if (INSTANCE == null) {
-
             synchronized (TodocDatabase.class) {
-
                 if (INSTANCE == null) {
-
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    TodocDatabase.class, "TodocDatabase.db")
-                            .addCallback(prepopulateDatabase())
-                            .build();
+                    INSTANCE = Room.databaseBuilder ( context.getApplicationContext (),
+                                    TodocDatabase.class, "TodocDatabase.db" )
+                            .addCallback ( prepopulateDatabase () )
+                            .build ();
                 }
             }
         }
         return INSTANCE;
     }
-    
+
     private static Callback prepopulateDatabase() {
         return new Callback () {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate ( db );
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("id", 1L);
-                contentValues.put("name", "Projet Tartampion");
-                contentValues.put("color", 0xFFEADAD1);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
-
+                Project[] projects = Project.getAllProjects ();
+                for (Project project : projects) {
+                    ContentValues contentValues = new ContentValues ();
+                    contentValues.put ( "id", project.getId () );
+                    contentValues.put ( "name", project.getName () );
+                    contentValues.put ( "color", project.getColor () );
+                    db.insert ( "Project", OnConflictStrategy.IGNORE, contentValues );
+                }
             }
         };
     }

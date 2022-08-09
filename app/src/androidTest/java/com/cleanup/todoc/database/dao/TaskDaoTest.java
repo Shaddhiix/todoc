@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
-class TaskDaoTest {
+public class TaskDaoTest {
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -43,7 +43,7 @@ class TaskDaoTest {
                 .build();
         this.database.projectDAO().insertProject(this.projects);
 
-        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getAllTasks ());
         assertTrue(tasks.isEmpty());
     }
 
@@ -59,14 +59,14 @@ class TaskDaoTest {
         this.database.taskDAO().insertTask(this.task1);
         this.database.taskDAO().insertTask(this.task2);
 
-        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getAllTasks ());
         assertEquals(2, tasks.size());
 
         this.database.taskDAO().insertTask(this.task3);
         this.database.taskDAO().insertTask(this.task4);
         this.database.taskDAO().insertTask(this.task5);
 
-        tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
+        tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getAllTasks ());
 
         assertEquals(5, tasks.size());
         assertEquals(projects.get(0).getId(), tasks.get(0).getProjectId());
@@ -93,13 +93,13 @@ class TaskDaoTest {
         this.database.taskDAO().insertTask(this.task4);
         this.database.taskDAO().insertTask(this.task5);
 
-        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getAllTasks ());
         assertEquals(5, tasks.size());
         assertEquals(task2.getName(), tasks.get(1).getName());
         assertEquals(task2.getCreationTimestamp(), tasks.get(1).getCreationTimestamp());
 
         this.database.taskDAO().deleteTask(tasks.get(1));
-        tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
+        tasks = LiveDataTestUtil.getValue(this.database.taskDAO().getAllTasks ());
         assertEquals(4, tasks.size());
         assertEquals(task3.getName(), tasks.get(1).getName());
         assertEquals(task3.getCreationTimestamp(), tasks.get(1).getCreationTimestamp());
